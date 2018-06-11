@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Bar from './bar';
+import './os.css';
 export default class Content extends Component {
     constructor() {
 		super();
@@ -140,7 +141,7 @@ export default class Content extends Component {
 		})
 	}
 
-	componentDidUpdate(prevProps, prevState) {
+	componentDidUpdate() {
 		if(this.state.isDrag) {
             document.addEventListener('mousemove', this.barMouseMove);
             document.addEventListener('mouseup', this.barMouseUp);
@@ -159,7 +160,8 @@ export default class Content extends Component {
 	
 
 	render() {
-		let {contenTop,barTop,barHeight,barFade,isDrag} = this.state;
+        let {contenTop,barTop,barHeight,barFade,isDrag} = this.state;
+        let {showBar} = this.props;
 		let barStyle     = {
 			top       : barTop,
 			height    : barHeight,
@@ -178,10 +180,10 @@ export default class Content extends Component {
 			barMouseMove : this.barMouseMove
 		}
 		return (
-			<div className="content" onWheel={this.wheel} ref={(ref)=>{this.content = ref}}>
-                <Bar method={barMethod} style={barStyle}></Bar>
-                <div className="c" style={contentStyle}>
-                    {this.props.children}
+			<div className="s-content" onWheel={this.wheel} ref={(ref)=>{this.content = ref}}>
+                {showBar?<Bar method={barMethod} style={barStyle} />:''}
+                <div className="s-c" style={contentStyle}>
+                    {this.props.children||null}
                 </div>
 			</div>
 		);

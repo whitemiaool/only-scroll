@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "just react scroll",
   "main": "dist/index.js",
+  "repository": "https://github.com/whitemiaool/only-scroll.git",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

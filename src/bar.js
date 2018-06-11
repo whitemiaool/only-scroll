@@ -13,14 +13,14 @@ export default class Bar extends PureComponent {
             transition: this.props.style.isDrag?'none': ''
         };
         return (
-        <div className="bar">
+        <div className="s-bar">
                 <div
                     onMouseOver  = {method.barMouseOver}
                     onMouseLeave = {method.barMouseLeave}
                     onMouseDown  = {method.barMouseDown}
                     onMouseUp    = {method.barMouseUp}
                     onMouseMove  = {method.barMouseMove}
-                    className    = 'l-bar' 
+                    className    = 's-l-bar' 
                     style        = {style}>
                 </div>
         </div>)
