@@ -1,6 +1,6 @@
-##JUST ONLY SCROLL && Introduction
+## JUST ONLY SCROLL && Introduction
 this is just  a very simple react scroll plug ,almost 200 lines to implement,its small and very useful.Most of the time we don't need much function,we just need text scroll in HTML,ye,If you happen to have such a need,you will love it
-##How to use 
+## How to use 
 ```
 npm i onlyscroll
 ```
