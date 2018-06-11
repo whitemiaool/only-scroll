@@ -39,14 +39,12 @@ var Bar = function (_PureComponent) {
             };
             return _react2.default.createElement(
                 'div',
-                { className: 'bar' },
+                { className: 's-bar' },
                 _react2.default.createElement('div', {
                     onMouseOver: method.barMouseOver,
                     onMouseLeave: method.barMouseLeave,
                     onMouseDown: method.barMouseDown,
-                    onMouseUp: method.barMouseUp,
-                    onMouseMove: method.barMouseMove,
-                    className: 'l-bar',
+                    className: 's-l-bar',
                     style: style })
             );
         }

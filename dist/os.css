@@ -1,0 +1,36 @@
+.s-content {
+    height: 400px;
+    width: 80%;
+    margin: 40px auto;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    position: relative;
+  }
+  .s-c {
+    width: 100%;
+    position: relative;
+    transition: all 0.5s;
+  }
+  
+  .s-bar {
+    position: absolute;
+    height: 100%;
+    width: 8px;
+    right: 0px;
+    z-index: 9;
+  }
+  
+  .s-l-bar {
+    position: absolute;
+    background: #2f2f2f;
+    width: 100%;
+    transition: all 0.5s;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .s-c div {
+    line-height: 20px;
+    height: 20px;
+    background: lightblue;
+    border: 1px solid #ccc;
+  }

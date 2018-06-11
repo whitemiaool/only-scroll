@@ -14,6 +14,8 @@ var _bar = require('./bar');
 
 var _bar2 = _interopRequireDefault(_bar);
 
+require('./os.css');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -189,7 +191,7 @@ var Content = function (_Component) {
 		}
 	}, {
 		key: 'componentDidUpdate',
-		value: function componentDidUpdate(prevProps, prevState) {
+		value: function componentDidUpdate() {
 			if (this.state.isDrag) {
 				document.addEventListener('mousemove', this.barMouseMove);
 				document.addEventListener('mouseup', this.barMouseUp);
@@ -218,6 +220,7 @@ var Content = function (_Component) {
 			    barHeight = _state.barHeight,
 			    barFade = _state.barFade,
 			    isDrag = _state.isDrag;
+			var showBar = this.props.showBar;
 
 			var barStyle = {
 				top: barTop,
@@ -232,20 +235,18 @@ var Content = function (_Component) {
 			var barMethod = {
 				barMouseOver: this.barMouseOver,
 				barMouseLeave: this.barMouseLeave,
-				barMouseDown: this.barMouseDown,
-				barMouseUp: this.barMouseUp,
-				barMouseMove: this.barMouseMove
+				barMouseDown: this.barMouseDown
 			};
 			return _react2.default.createElement(
 				'div',
-				{ className: 'content', onWheel: this.wheel, ref: function ref(_ref) {
+				{ className: 's-content', onWheel: this.wheel, ref: function ref(_ref) {
 						_this3.content = _ref;
 					} },
-				_react2.default.createElement(_bar2.default, { method: barMethod, style: barStyle }),
+				showBar ? _react2.default.createElement(_bar2.default, { method: barMethod, style: barStyle }) : '',
 				_react2.default.createElement(
 					'div',
-					{ className: 'c', style: contentStyle },
-					this.props.children
+					{ className: 's-c', style: contentStyle },
+					this.props.children || null
 				)
 			);
 		}

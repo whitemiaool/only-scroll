@@ -18,8 +18,6 @@ export default class Bar extends PureComponent {
                     onMouseOver  = {method.barMouseOver}
                     onMouseLeave = {method.barMouseLeave}
                     onMouseDown  = {method.barMouseDown}
-                    onMouseUp    = {method.barMouseUp}
-                    onMouseMove  = {method.barMouseMove}
                     className    = 's-l-bar' 
                     style        = {style}>
                 </div>

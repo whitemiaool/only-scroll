@@ -176,8 +176,6 @@ export default class Content extends Component {
 			barMouseOver : this.barMouseOver,
 			barMouseLeave: this.barMouseLeave,
 			barMouseDown : this.barMouseDown,
-			barMouseUp   : this.barMouseUp,
-			barMouseMove : this.barMouseMove
 		}
 		return (
 			<div className="s-content" onWheel={this.wheel} ref={(ref)=>{this.content = ref}}>
