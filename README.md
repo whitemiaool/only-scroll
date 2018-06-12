@@ -19,7 +19,7 @@ import scroll package
     }
 ```
 ## Demo
-you may need to see it before you npn i it [demo](https://github.com/whitemiaool/only-scroll.git)
+you may need to see it before you npn i it [demo](https://dyxuan.top/demo/onlyscroll/)
 ## API? Or Props
 showBar:{Boolean} ---if you need a bar to show text view percent
 ## TODO
