@@ -1,3 +1,7 @@
+body {
+  overscroll-behavior-y: contain;
+}
+
 .s-content {
     height: 400px;
     width: 80%;

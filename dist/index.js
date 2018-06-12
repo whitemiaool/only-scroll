@@ -127,6 +127,7 @@ var Content = function (_Component) {
 		};
 
 		_this.barMouseUp = function (e) {
+			_this.eventStop(e);
 			if (e.cancelable && !e.defaultPrevented) {
 				e.preventDefault();
 			}
@@ -134,6 +135,50 @@ var Content = function (_Component) {
 			_this.setState({
 				isDrag: false
 			});
+		};
+
+		_this.touchStart = function (e) {
+			_this.eventStop(e);
+			_this.setState({
+				touchPos: e.targetTouches[0].clientY,
+				touchContentTop: _this.state.contenTop,
+				barFade: false
+			});
+		};
+
+		_this.touchMove = function (e) {
+			_this.eventStop(e);
+			var _this$state3 = _this.state,
+			    touchPos = _this$state3.touchPos,
+			    touchContentTop = _this$state3.touchContentTop,
+			    sH = _this$state3.sH,
+			    cH = _this$state3.cH,
+			    barRatio = _this$state3.barRatio,
+			    barHeight = _this$state3.barHeight;
+
+			var move = (e.targetTouches[0].clientY - touchPos) * 1.5;
+			var contenTop = touchContentTop - move;
+			var barTop = contenTop / barRatio;
+			if (contenTop <= 0) {
+				contenTop = 0;
+				barTop = 0;
+			} else if (contenTop > sH - cH) {
+				contenTop = sH - cH;
+				barTop = cH - barHeight;
+			}
+			_this.setState({
+				contenTop: contenTop,
+				barTop: barTop
+			});
+		};
+
+		_this.touchEnd = function (e) {
+			_this.eventStop(e);
+			setTimeout(function () {
+				_this.setState({
+					barFade: true
+				});
+			}, 1000);
 		};
 
 		_this.barInit = function () {
@@ -144,6 +189,7 @@ var Content = function (_Component) {
 			var sH = c.scrollHeight < c.clientHeight ? c.clientHeight : c.scrollHeight;
 			var barHeight = cH / (sH / cH) < cH / 5 ? cH / 5 : cH / (sH / cH);
 			var barTop = (contenTop + cH) / sH * cH - barHeight;
+			var barRatio = sH / cH;
 			if (barTop < 0) {
 				barTop = 0;
 				contenTop = 0;
@@ -157,7 +203,8 @@ var Content = function (_Component) {
 				cH: cH,
 				barHeight: barHeight,
 				barTop: barTop,
-				contenTop: contenTop
+				contenTop: contenTop,
+				barRatio: barRatio
 			});
 		};
 
@@ -167,9 +214,12 @@ var Content = function (_Component) {
 			// content wrap
 			sH: 0,
 			cH: 0,
+			// touch
+			touchPos: 0,
 
 			// content
 			contenTop: 0,
+			touchContentTop: 0,
 
 			// Bar
 			barTop: 0,
@@ -180,6 +230,7 @@ var Content = function (_Component) {
 			clickBarTop: 0,
 			isDrag: false,
 			barFade: true
+			// touchShowBar:true
 		};
 		return _this;
 	}
@@ -239,7 +290,12 @@ var Content = function (_Component) {
 			};
 			return _react2.default.createElement(
 				'div',
-				{ className: 's-content', onWheel: this.wheel, ref: function ref(_ref) {
+				{ className: 's-content',
+					onTouchMove: this.touchMove,
+					onTouchStart: this.touchStart,
+					onTouchEnd: this.touchEnd,
+					onWheel: this.wheel,
+					ref: function ref(_ref) {
 						_this3.content = _ref;
 					} },
 				showBar ? _react2.default.createElement(_bar2.default, { method: barMethod, style: barStyle }) : '',

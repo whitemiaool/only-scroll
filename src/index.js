@@ -8,21 +8,25 @@ export default class Content extends Component {
 		this.timer 	 = null;
 		this.state = {
 			// content wrap
-			sH         : 0,
-			cH         : 0,
+			sH             : 0,
+			cH             : 0,
+			// touch
+			touchPos       : 0,
 
 			// content
-			contenTop  : 0,
+			contenTop      : 0,
+			touchContentTop: 0,
 
 			// Bar
-			barTop     : 0,
-			barHeight  : 0,
-			barRatio   : 1,
-			dragStart  : 0,
-			dragEnd    : 0,
-			clickBarTop: 0,
-			isDrag     : false,
-			barFade    : true
+			barTop         : 0,
+			barHeight      : 0,
+			barRatio       : 1,
+			dragStart      : 0,
+			dragEnd        : 0,
+			clickBarTop    : 0,
+			isDrag         : false,
+			barFade        : true,
+			// touchShowBar:true
 		}
 	}
 
@@ -108,6 +112,7 @@ export default class Content extends Component {
 		})
 	}
 	barMouseUp =  (e)=>{
+		this.eventStop(e);		
 		if(e.cancelable && !e.defaultPrevented) {
             e.preventDefault();
         }
@@ -117,6 +122,44 @@ export default class Content extends Component {
 		})
 	}
 
+	touchStart = (e)=>{
+		this.eventStop(e);		
+		this.setState({
+			touchPos:e.targetTouches[0].clientY,
+			touchContentTop:this.state.contenTop,
+			barFade:false
+		})
+	}
+
+	touchMove = (e)=>{
+		this.eventStop(e);
+		let {touchPos,touchContentTop,sH,cH,barRatio,barHeight} = this.state;
+		let move = (e.targetTouches[0].clientY - touchPos)*1.5;
+		let contenTop = (touchContentTop - move);
+		let barTop = contenTop / barRatio;
+		if(contenTop <= 0) {
+			contenTop = 0;
+			barTop = 0;
+		} else if(contenTop > (sH-cH)) {
+			contenTop = sH-cH;
+			barTop = cH - barHeight
+		}
+		this.setState({
+			contenTop,
+			barTop
+		})
+	}
+
+	touchEnd = (e)=>{
+		this.eventStop(e);		
+		setTimeout(() => {
+			this.setState({
+				barFade: true
+			})
+		}, 1000)
+
+	}
+
 	barInit = ()=>{
 		let {contenTop} = this.state;
 		let c	        = this.content;
@@ -124,6 +167,7 @@ export default class Content extends Component {
 		let sH	        = c.scrollHeight<c.clientHeight?c.clientHeight: c.scrollHeight;
 		let barHeight   = cH / (sH/cH) < cH/5 ?cH/5                   : cH / (sH/cH);
 		let barTop      = ((contenTop + cH) / sH )*cH - barHeight;
+		let barRatio    = sH / cH;
 		if(barTop < 0) {
 			barTop    = 0;
 			contenTop =  0;
@@ -137,7 +181,8 @@ export default class Content extends Component {
 			cH,
 			barHeight,
 			barTop,
-			contenTop
+			contenTop,
+			barRatio
 		})
 	}
 
@@ -178,7 +223,12 @@ export default class Content extends Component {
 			barMouseDown : this.barMouseDown,
 		}
 		return (
-			<div className="s-content" onWheel={this.wheel} ref={(ref)=>{this.content = ref}}>
+			<div className="s-content" 
+				onTouchMove  = {this.touchMove} 
+				onTouchStart = {this.touchStart} 
+				onTouchEnd   = {this.touchEnd}
+				onWheel      = {this.wheel} 
+				ref          = {(ref) => {this.content = ref}}>
                 {showBar?<Bar method={barMethod} style={barStyle} />:''}
                 <div className="s-c" style={contentStyle}>
                     {this.props.children||null}
