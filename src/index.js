@@ -206,7 +206,7 @@ export default class Content extends Component {
 
 	render() {
         let {contenTop,barTop,barHeight,barFade,isDrag} = this.state;
-        let {showBar} = this.props;
+        let {showBar,style}                             = this.props;
 		let barStyle     = {
 			top       : barTop,
 			height    : barHeight,
@@ -224,6 +224,7 @@ export default class Content extends Component {
 		}
 		return (
 			<div className="s-content" 
+				style        = {style||{}}
 				onTouchMove  = {this.touchMove} 
 				onTouchStart = {this.touchStart} 
 				onTouchEnd   = {this.touchEnd}

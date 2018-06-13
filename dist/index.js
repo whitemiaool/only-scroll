@@ -271,7 +271,9 @@ var Content = function (_Component) {
 			    barHeight = _state.barHeight,
 			    barFade = _state.barFade,
 			    isDrag = _state.isDrag;
-			var showBar = this.props.showBar;
+			var _props = this.props,
+			    showBar = _props.showBar,
+			    style = _props.style;
 
 			var barStyle = {
 				top: barTop,
@@ -291,6 +293,7 @@ var Content = function (_Component) {
 			return _react2.default.createElement(
 				'div',
 				{ className: 's-content',
+					style: style || {},
 					onTouchMove: this.touchMove,
 					onTouchStart: this.touchStart,
 					onTouchEnd: this.touchEnd,
