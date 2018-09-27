@@ -206,7 +206,7 @@ export default class Content extends Component {
 
 	render() {
         let {contenTop,barTop,barHeight,barFade,isDrag} = this.state;
-        let {showBar,style}                             = this.props;
+        let {showBar,style,className}                   = this.props;
 		let barStyle     = {
 			top       : barTop,
 			height    : barHeight,
@@ -222,8 +222,10 @@ export default class Content extends Component {
 			barMouseLeave: this.barMouseLeave,
 			barMouseDown : this.barMouseDown,
 		}
+		let classN = ['s-content']
+		!!className?classN.push(className):''
 		return (
-			<div className="s-content" 
+			<div className={classN.join(' ')} 
 				style        = {style||{}}
 				onTouchMove  = {this.touchMove} 
 				onTouchStart = {this.touchStart} 

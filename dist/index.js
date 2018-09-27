@@ -273,7 +273,8 @@ var Content = function (_Component) {
 			    isDrag = _state.isDrag;
 			var _props = this.props,
 			    showBar = _props.showBar,
-			    style = _props.style;
+			    style = _props.style,
+			    className = _props.className;
 
 			var barStyle = {
 				top: barTop,
@@ -290,9 +291,11 @@ var Content = function (_Component) {
 				barMouseLeave: this.barMouseLeave,
 				barMouseDown: this.barMouseDown
 			};
+			var classN = ['s-content'];
+			!!className ? classN.push(className) : '';
 			return _react2.default.createElement(
 				'div',
-				{ className: 's-content',
+				{ className: classN.join(' '),
 					style: style || {},
 					onTouchMove: this.touchMove,
 					onTouchStart: this.touchStart,

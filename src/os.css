@@ -3,17 +3,17 @@ body {
 }
 
 .s-content {
-    height: 400px;
-    width: 80%;
-    margin: 40px auto;
+    /* height: 400px; */
+    /* width: 80%; */
+    /* margin: 40px auto; */
     overflow: hidden;
-    border: 1px solid #ccc;
-    position: relative;
+    /* border: 1px solid #ccc; */
+    /* position: relative; */
   }
   .s-c {
     width: 100%;
     position: relative;
-    transition: all 0.5s;
+    transition: all 0.1s;
   }
   
   .s-bar {
@@ -33,8 +33,8 @@ body {
     cursor: pointer;
   }
   .s-c div {
-    line-height: 20px;
-    height: 20px;
-    background: lightblue;
-    border: 1px solid #ccc;
+    /* line-height: 20px; */
+    /* height: 20px; */
+    /* background: lightblue; */
+    /* border: 1px solid #ccc; */
   }
